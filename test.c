@@ -1,7 +1,5 @@
 #include "test.h"
 
-
-
 int main(void)
 {
     void *mlx_ptr;

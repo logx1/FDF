@@ -15,6 +15,7 @@ int		check_new_line(char *str);
 char	*ft_strjoin(char *str1, char *str2);
 char	*ft_substr(char *s, int start, size_t len);
 char	*buckup_finder(char *line);
+void draw(void *mlx_ptr,void *win_ptr,float x0, float y0, float x1, float y1, int color);
 
 typedef struct point
 {

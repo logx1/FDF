@@ -1,4 +1,14 @@
 #include "test.h"
+#include <math.h>
+float x_isso(float x,float y)
+{
+    return ((x - y) * cos(0.8) + 20);
+}
+
+float y_isso(float x,float y,int z)
+{
+    return ((((x + y) * sin(0.8)) - z) + 20); 
+}
 
 float maxx(float x, float y)
 {
@@ -20,7 +30,10 @@ void draw(void *mlx_ptr, void *win_ptr, float x0,float y0,float x1,float y1, int
 {
     float x_styp;
     float y_styp;
-
+    x0 *= 20;
+    x1 *= 20;
+    y0 *= 20;
+    y1 *= 20;
     x_styp = x1 - x0;
     y_styp = y1 - y0;
 

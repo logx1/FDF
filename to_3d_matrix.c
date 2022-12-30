@@ -1,4 +1,4 @@
-#include "test.h"
+#include "fdf.h"
 
 
 int number_count(char *str)
@@ -57,8 +57,8 @@ int j = 0;
     int l = 50;
     int c = 50;
 int y_linght = 0;
-int x_linght = number_count(get_next_line(fd));
-while (get_next_line(fd))
+int x_linght = number_count(get_next_line(fd,5));
+while (get_next_line(fd,5))
     y_linght++;
     y_linght++;
     close(fd);
@@ -68,7 +68,7 @@ point new_3d_matrix[x_linght][y_linght];
 fd = open("./test_maps/42.fdf",O_RDONLY);
 while (i < y_linght)
 {
-    matrix[i] = new(get_next_line(fd));
+    matrix[i] = new(get_next_line(fd,5));
     i++;
 }
 j = 0;
@@ -90,7 +90,6 @@ while (j < y_linght)
 			if (j < (y_linght -1) )
 			{
                 draw(mlx_ptr,win_ptr,x_isso(i,j), y_isso(i,j,matrix[j][i]), x_isso(i ,j+1), y_isso(i ,j+1,matrix[j+1][i]),0x75d36e);
-			
 			}
            
         } else

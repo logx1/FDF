@@ -1,13 +1,14 @@
-#ifndef TEST_H
-# define TEST_H
+#ifndef FDF_H
+# define FDF_H
 #include "mlx.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
 #include <fcntl.h>
-#define BUFFER_SIZE 5
+#include <math.h>
+// #define BUFFER_SIZE 5
 
-char	*get_next_line(int fd);
+char	*get_next_line(int fd, int BUFFER_SIZE);
 int		ft_strlen(char *str);
 char	*ft_strdup(char *str);
 char	*ft_strchr(const char *s, int c);

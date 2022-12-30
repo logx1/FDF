@@ -1,5 +1,5 @@
-#include "test.h"
-#include <math.h>
+#include "fdf.h"
+
 float x_isso(float x,float y)
 {
     return ((x - y) * cos(0.8) + 20);
@@ -9,7 +9,6 @@ float y_isso(float x,float y,int z)
 {
     return ((((x + y) * sin(0.8)) - z) + 20); 
 }
-
 float maxx(float x, float y)
 {
     if (x > y)
@@ -58,7 +57,7 @@ void draw(void *mlx_ptr, void *win_ptr, float x0,float y0,float x1,float y1, int
 //     mlx_ptr =mlx_init();
 //      win_ptr = mlx_new_window(mlx_ptr, 500, 500 , "test");
 
-//    draw0(mlx_ptr,win_ptr,50,50,40,400);
+//    draw(mlx_ptr,win_ptr,50,50,40,400);
         
     
     

@@ -6,13 +6,13 @@
 /*   By: abdel-ou <abdel-ou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 11:07:26 by abdel-ou          #+#    #+#             */
-/*   Updated: 2022/12/27 16:23:44 by abdel-ou         ###   ########.fr       */
+/*   Updated: 2022/12/30 17:32:51 by abdel-ou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "test.h"
+#include "fdf.h"
 
-char	*ft_big_line(int fd, char *buffer, char *backup)
+char	*ft_big_line(int fd, char *buffer, char *backup, int BUFFER_SIZE)
 {
 	int		byte_read;
 	char	*char_temp;
@@ -53,7 +53,7 @@ char	*buckup_finder(char *line)
 	return (backup);
 }
 
-char	*get_next_line(int fd)
+char	*get_next_line(int fd, int BUFFER_SIZE)
 {
 	char		*line;
 	char		*buffer;
@@ -64,7 +64,7 @@ char	*get_next_line(int fd)
 	buffer = (char *)malloc(sizeof(char ) * (BUFFER_SIZE + 1));
 	if (!buffer)
 		return (0);
-	line = ft_big_line(fd, buffer, backup);
+	line = ft_big_line(fd, buffer, backup,BUFFER_SIZE);
 	free(buffer);
 	if (!line)
 		return (0);

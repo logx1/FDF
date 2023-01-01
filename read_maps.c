@@ -41,7 +41,7 @@ char	*ft_print_line(const char *s1, int *index, char c)
 	if (!copy)
 		return (NULL);
 	i = 0;
-	while (s1[*index] && s1[*index] != c)
+	while (s1[*index] && s1[*index] != c )
 		copy[i++] = s1[(*index)++];
 	
 	return (copy);
@@ -71,10 +71,14 @@ int	*ft_split(char const *s, char c)
 		return (NULL);
 	word_count = ft_word_count(s, c);
 	arr = malloc(sizeof(int) * (word_count +1));
-	if (!arr)
-		return (NULL);
+	
 	while (i < word_count)
 	{
+		if (i == 0)
+		{
+			ft_print_line(s, &index, c);
+		}
+		
 		arr[i] = atoi(ft_print_line(s, &index, c));
 		// if (!arr[i])
 		// 	return (free_err(arr));
@@ -133,7 +137,7 @@ int main(int argc,char *argv[])
     end = get_weight(argv[1]);
     int fd = open(argv[1],O_RDONLY);
     nn = ft_split(get_next_line(fd, 5), ' ');
-    while (i <= end)
+    while (i < end)
     {
 		printf("%d === %d \n",i,nn[i]);  
         i++;

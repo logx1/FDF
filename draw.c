@@ -44,7 +44,6 @@ void draw(void *mlx_ptr, void *win_ptr, float x0,float y0,float x1,float y1, int
         x0 += x_styp;
         y0 += y_styp;
     }
-    
 }
 
 

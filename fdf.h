@@ -7,6 +7,7 @@
 #include <fcntl.h>
 #include <math.h>
 // #define BUFFER_SIZE 5
+// cc -I /usr/local/include get_next_line.c get_next_line_utils.c draw.c to_3d_matrix.c -L /usr/local/lib -lmlx -framework OpenGL -framework AppKit
 
 char	*get_next_line(int fd, int BUFFER_SIZE);
 int		ft_strlen(char *str);
@@ -19,6 +20,7 @@ char	*buckup_finder(char *line);
 void draw(void *mlx_ptr,void *win_ptr,float x0, float y0, float x1, float y1, int color);
 float x_isso(float x,float y);
 float y_isso(float x,float y,int z);
+int	*ft_split(char const *s, char c);
 
 typedef struct point
 {

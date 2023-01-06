@@ -48,13 +48,13 @@ int ft_atoi_base(const char *str, int str_base)
 	return (nb);
 }
 
-int	main(int ac, char **av)
-{
-	int		nb;
-	if (ac >= 3)
-	{
-		nb = ft_atoi_base(av[1], atoi(av[2]));
-		printf("%d\n", nb);
-	}
-	return (0);
-}
+// int	main(int ac, char **av)
+// {
+// 	int		nb;
+// 	if (ac >= 3)
+// 	{
+// 		nb = ft_atoi_base(av[1], atoi(av[2]));
+// 		printf("%d\n", nb);
+// 	}
+// 	return (0);
+// }

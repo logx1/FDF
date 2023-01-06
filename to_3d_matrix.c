@@ -49,7 +49,7 @@ int main()
     void *mlx_ptr;
     void *win_ptr;
    
-int fd = open("./test_maps/42.fdf",O_RDONLY);
+int fd = open("./test_maps/mars.fdf",O_RDONLY);
 int **matrix;
 
 int i = 0;
@@ -63,9 +63,8 @@ while (get_next_line(fd,5))
     y_linght++;
     close(fd);
 matrix = (int **)malloc(sizeof(int) * ((x_linght * y_linght) + 1));
-// new_3d_matrix = (point **)malloc(sizeof(point *) * ((x_linght * y_linght) + 1));
-point new_3d_matrix[x_linght][y_linght];
-fd = open("./test_maps/42.fdf",O_RDONLY);
+
+fd = open("./test_maps/mars.fdf",O_RDONLY);
 while (i < y_linght)
 {
     matrix[i] = new(get_next_line(fd,5));

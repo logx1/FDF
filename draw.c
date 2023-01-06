@@ -2,12 +2,12 @@
 
 float x_isso(float x,float y)
 {
-    return ((x - y) * cos(0.8) + 20);
+    return ((x - y) * cos(0.35) +150);
 }
 
 float y_isso(float x,float y,int z)
 {
-    return ((((x + y) * sin(0.8)) - z) + 20); 
+    return ((((x + y) * sin(0.35)) - z) + 100); 
 }
 float maxx(float x, float y)
 {
@@ -25,14 +25,14 @@ float abss(float x)
     }
     return (-x);
 }
-void draw(void *mlx_ptr, void *win_ptr, float x0,float y0,float x1,float y1, int color)
+void draw(void *mlx_ptr, void *win_ptr, float x0,float y0,float x1,float y1, int color, int zoom)
 {
     float x_styp;
     float y_styp;
-    x0 *= 20;
-    x1 *= 20;
-    y0 *= 20;
-    y1 *= 20;
+    x0 *= zoom;
+    x1 *= zoom;
+    y0 *= zoom;
+    y1 *= zoom;
     x_styp = x1 - x0;
     y_styp = y1 - y0;
 

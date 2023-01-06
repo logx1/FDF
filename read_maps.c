@@ -22,108 +22,22 @@ int	ft_word_count(const char *str, char c)
 	return (count);
 }
 
-char	*ft_print_line(const char *s1, int *index, char c)
+int get_height(char *file_name)
 {
-	char	*copy;
-	size_t	word_len;
-	int		i;
-
-	word_len = 0;
-	while (s1[*index] == c)
-		(*index)++;
-	i = *index;
-	while (s1[i] && s1[i] != c)
-	{
-		word_len++;
-		i++;
-	}
-	copy = malloc(sizeof(char) * (word_len + 1));
-	if (!copy)
-		return (NULL);
-	i = 0;
-	while (s1[*index] && s1[*index] != c )
-		copy[i++] = s1[(*index)++];
-	
-	return (copy);
+   int fd = open(file_name,O_RDONLY);
+    int i = 0;
+    while (get_next_line(fd,110))
+    {
+        i++;
+    }
+    close(fd);
+    return (i);
 }
-
-char	**free_err(char **tab)
-{
-	unsigned int	i;
-
-	i = 0;
-	while (tab[i])
-		free(tab[i++]);
-	free(tab);
-	return (NULL);
-}
-
-int	*ft_split(char const *s, char c)
-{
-	int	*arr;
-	int		index;
-	int		word_count;
-	int		i;
-
-	index = 0;
-	i = 0;
-	if (!s)
-		return (NULL);
-	word_count = ft_word_count(s, c);
-	arr = malloc(sizeof(int) * (word_count +1));
-	
-	while (i < word_count)
-	{
-		if (i == 0)
-		{
-			ft_print_line(s, &index, c);
-		}
-		
-		arr[i] = atoi(ft_print_line(s, &index, c));
-		// if (!arr[i])
-		// 	return (free_err(arr));
-		i++;
-	}
-	return (arr);
-}
-
-// int	ft_word_count(const char *str, char c)
-// {
-// 	int	i;
-// 	int	count;
-
-// 	i = 0;
-// 	count = 0;
-// 	while (str[i])
-// 	{
-// 		if (str[i] == c)
-// 			i++;
-// 		else
-// 		{
-// 			count++;
-// 			while (str[i] != c && str[i])
-// 				i++;
-// 		}
-// 	}
-// 	return (count);
-// }
-
-// int get_height(char *file_name)
-// {
-//    int fd = open(file_name,O_RDONLY);
-//     int i = 0;
-//     while (get_next_line(fd,110))
-//     {
-//         i++;
-//     }
-//     close(fd);
-//     return (i);
-// }
 int get_weight(char *file_name)
 {
     int fd = open(file_name, O_RDONLY);
     int i = 0;
-    i = ft_word_count(get_next_line(fd,5), ' ');
+    i = ft_word_count(get_next_line(fd,5), ' ') - 1;
     close(fd);
     return (i);
 }
@@ -131,16 +45,88 @@ int get_weight(char *file_name)
 int main(int argc,char *argv[])
 {
     (void)argc;
-    int *nn;
+        void *mlx_ptr;
+    void *win_ptr;
+    int fd = open(argv[1], O_RDONLY);
     int i = 0;
-    int end ;
-    end = get_weight(argv[1]);
-    int fd = open(argv[1],O_RDONLY);
-    nn = ft_split(get_next_line(fd, 5), ' ');
-    while (i < end)
+    int j = 0;
+    
+    int weight = get_weight(argv[1]);
+    int height = get_height(argv[1]);
+    // int col;
+    char **line = ft_split(get_next_line(fd, 5), ' ');
+    int nn[height][weight];
+    // int color[height][weight];
+    while (j < height)
     {
-		printf("%d === %d \n",i,nn[i]);  
+        while (line[i])
+        {
+        nn[j][i] = atoi(line[i]);
+        // color[j][i] = ft_atoi_base(ft_strnstr(line[i],"0x"),16);
+        i++;
+        }
+    i = 0;
+    j++;
+    line = ft_split(get_next_line(fd, 5), ' ');
+    }
+    
+  
+    i = 0;
+    j = 0;
+    int zoom = 2;
+printf("%d",zoom);
+    while (j < height)
+    {
+        while (i < weight)
+        {
+            printf("%3d",nn[j][i]);
+            i++;
+        }
+        printf("\n");
+        i = 0;
+        j++;
+    }
+    
+    j = 0;
+i = 0;
+
+mlx_ptr =mlx_init();
+win_ptr = mlx_new_window(mlx_ptr, 2000, 1550 , "test");
+
+
+while (j < height)
+{
+    i = 0;
+    while (i < weight)
+    {
+     
+		   	// if (i < (weight -1) )
+			// {
+			// 	draw(mlx_ptr,win_ptr,x_isso(i,j), y_isso(i,j,nn[j][i]), x_isso(i+1 ,j), y_isso(i+1 ,j,nn[j][i+1]),color[i][j]);			
+            //     }
+			// if (j < (height -1) )
+			// {
+            //     draw(mlx_ptr,win_ptr,x_isso(i,j), y_isso(i,j,nn[j][i]), x_isso(i ,j+1), y_isso(i ,j+1,nn[j+1][i]),color[i][j]);
+			// }
+           
+       
+      
+			if (i < (weight -1) )
+			{
+				 draw(mlx_ptr,win_ptr,x_isso(i,j), y_isso(i,j,nn[j][i]), x_isso(i+1 ,j), y_isso(i+1 ,j,nn[j][i+1]),0xFA5D2B,zoom);
+			}
+			if (j < (height -1) )
+			{
+				draw(mlx_ptr,win_ptr,x_isso(i,j), y_isso(i,j,nn[j][i]), x_isso(i ,j+1), y_isso(i ,j+1,nn[j+1][i]),0xFA5D2B,zoom);
+			}
+      
         i++;
     }
+    j++;
+} 
+    
+
+   mlx_loop(mlx_ptr);
+    
     return (0);
 }

@@ -6,11 +6,11 @@
 /*   By: abdel-ou <abdel-ou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 22:58:13 by abdel-ou          #+#    #+#             */
-/*   Updated: 2023/01/02 16:43:50 by abdel-ou         ###   ########.fr       */
+/*   Updated: 2023/02/09 14:55:24 by abdel-ou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "src/fdf.h"
 
 static int	ft_word_count(const char *str, char c)
 {

@@ -1,86 +1,71 @@
-#include "fdf.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   color.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: abdel-ou <abdel-ou@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/02/14 12:04:15 by abdel-ou          #+#    #+#             */
+/*   Updated: 2023/02/15 23:48:16 by abdel-ou         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-int	ft_word_count(const char *str, char c)
+#include "src/fdf.h"
+
+int	get_r(int trgb)
 {
-	int	i;
-	int	count;
-
-	i = 0;
-	count = 0;
-	while (str[i])
-	{
-		if (str[i] == c)
-			i++;
-		else
-		{
-			count++;
-			while (str[i] != c && str[i])
-				i++;
-		}
-	}
-	return (count);
+	return ((trgb >> 16) & 0xFF);
 }
 
-int get_height(char *file_name)
+int	get_g(int trgb)
 {
-   int fd = open(file_name,O_RDONLY);
-    int i = 0;
-    while (get_next_line(fd,110))
-    {
-        i++;
-    }
-    close(fd);
-    return (i);
-}
-int get_weight(char *file_name)
-{
-    int fd = open(file_name, O_RDONLY);
-    int i = 0;
-    i = ft_word_count(get_next_line(fd,5), ' ') - 1;
-    close(fd);
-    return (i);
+	return ((trgb >> 8) & 0xFF);
 }
 
-int main(int argc,char *argv[])
+int	get_b(int trgb)
 {
-    (void)argc;
-        void *mlx_ptr;
-    void *win_ptr;
-    int fd = open(argv[1], O_RDONLY);
-    int i = 0;
-    int j = 0;
-    
-    int weight = get_weight(argv[1]);
-    int height = get_height(argv[1]);
-    char **line = ft_split(get_next_line(fd, 5), ' ');
-    int nn[height][weight];
-    // while (j < height)
-    // {
-    //     while (line[i])
-    //     {
-    //     nn[j][i] = atoi(line[i]);
-    //     i++;
-    //     }
-    // i = 0;
-    // j++;
-    // line = ft_split(get_next_line(fd, 5), ' ');
-    // }
-    
-  
-    // i = 0;
-    // j = 0;
-    // while (j < height)
-    // {
-    //     while (i < weight)
-    //     {
-    //         printf("%3d",nn[j][i]);
-    //         i++;
-    //     }
-    //     printf("\n");
-    //     i = 0;
-    //     j++;
-    // }
-    printf("%d",ft_atoi_base(ft_strnstr(line[0],"0x"),16));
-
-    return (0);
+	return (trgb & 0xFF);
 }
+
+int	create_trgb(int r, int g, int b)
+{
+	return (r << 16 | g << 8 | b);
+}
+
+int	ffcolor(int leaght, int color1, int color2, int p)
+{
+	int			final;
+	t_color		color_1;
+	t_color		color_2;
+
+	color_1.color_r = (float)(get_r(color1) * (leaght - p)) / leaght;
+	color_1.color_g = (float)(get_g(color1) * (leaght - p)) / leaght;
+	color_1.color_b = (float)(get_b(color1) * (leaght - p)) / leaght;
+	color_2.color_r = (float)(get_r(color2) * p) / leaght;
+	color_2.color_g = (float)(get_g(color2) * p) / leaght;
+	color_2.color_b = (float)(get_b(color2) * p) / leaght;
+	final = create_trgb((int)(color_1.color_r + color_2.color_r),
+			(int)(color_1.color_g + color_2.color_g),
+			(int)(color_1.color_b + color_2.color_b));
+	return (final);
+}
+// int main()
+// {
+//     void *mlx;
+//     void *win;
+//     int i = 1;
+//     mlx = mlx_init();
+//     win = mlx_new_window(mlx,500,500,"fdf");
+//     int color1 = 0x00ff0000; // red
+//     int color2 = 0x000000ff; // green
+// while (i < 500)
+// {
+//     mlx_pixel_put(mlx, win, i, 50, ffcolor(500,color1,color2,i));
+//     mlx_pixel_put(mlx, win, i, 100, color1);
+//     mlx_pixel_put(mlx, win, i, 150, color2);
+// i++;
+// }
+
+// mlx_loop(mlx);
+//     return (0);
+// }

@@ -1,34 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strnstr.c                                       :+:      :+:    :+:   */
+/*   isometric.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abdel-ou <abdel-ou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/14 01:31:41 by abdel-ou          #+#    #+#             */
-/*   Updated: 2023/02/14 07:47:49 by abdel-ou         ###   ########.fr       */
+/*   Created: 2023/02/06 09:32:37 by abdel-ou          #+#    #+#             */
+/*   Updated: 2023/02/06 12:32:06 by abdel-ou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "src/fdf.h"
+#include "fdf.h"
 
-char	*ft_strnstr(const char *haystack, const char *needle)
+void	isometric(t_point *dot, double angle)
 {
-	size_t	i;
-	size_t	j;
-
-	if (!needle[0])
-		return ((char *)haystack);
-	i = 0;
-	while (haystack[i])
-	{
-	j = 0;
-		while (haystack[i + j] && needle[j]
-			&& haystack[i + j] == needle[j])
-			j++;
-		if (!needle[j])
-			return ((char *)(haystack + i +2));
-		i++;
-	}
-	return (NULL);
+	dot->x = (dot->x - dot->y) * cos(angle);
+	dot->y = (dot->x + dot->y) * sin(angle) - dot->z;
 }

@@ -1,34 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strnstr.c                                       :+:      :+:    :+:   */
+/*   set_param.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abdel-ou <abdel-ou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/14 01:31:41 by abdel-ou          #+#    #+#             */
-/*   Updated: 2023/02/14 07:47:49 by abdel-ou         ###   ########.fr       */
+/*   Created: 2023/02/06 09:32:53 by abdel-ou          #+#    #+#             */
+/*   Updated: 2023/02/07 16:48:53 by abdel-ou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "src/fdf.h"
+#include "fdf.h"
 
-char	*ft_strnstr(const char *haystack, const char *needle)
+void	set_param(t_point *a, t_point *b, t_point *param)
 {
-	size_t	i;
-	size_t	j;
-
-	if (!needle[0])
-		return ((char *)haystack);
-	i = 0;
-	while (haystack[i])
-	{
-	j = 0;
-		while (haystack[i + j] && needle[j]
-			&& haystack[i + j] == needle[j])
-			j++;
-		if (!needle[j])
-			return ((char *)(haystack + i +2));
-		i++;
-	}
-	return (NULL);
+	a->x *= param->scale;
+	a->y *= param->scale;
+	b->x *= param->scale;
+	b->y *= param->scale;
+	a->z *= param->z_scale;
+	b->z *= param->z_scale;
+	isometric(a, param->angle);
+	isometric(b, param->angle);
+	a->x += param->push_x;
+	a->y += param->push_y;
+	b->x += param->push_x;
+	b->y += param->push_y;
 }

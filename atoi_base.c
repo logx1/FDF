@@ -1,7 +1,18 @@
-#include <stdlib.h>
-#include <stdio.h>
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   atoi_base.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: abdel-ou <abdel-ou@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/02/14 15:04:10 by abdel-ou          #+#    #+#             */
+/*   Updated: 2023/02/14 15:11:29 by abdel-ou         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-int		ft_iswhitespace(char const c)
+#include "src/fdf.h"
+
+int	ft_iswhitespace(char const c)
 {
 	if (c == ' ' || c == '\n' || c == '\t' || c == '\v'
 		|| c == '\r' || c == '\f')
@@ -11,10 +22,13 @@ int		ft_iswhitespace(char const c)
 
 int	base(int c, int base)
 {
-	char *str = "0123456789abcdef";
-	char *str2 = "0123456789ABCDEF";
-	int  i = 0;
+	char	*str;
+	char	*str2;
+	int		i;
 
+	str = "0123456789abcdef";
+	str2 = "0123456789ABCDEF";
+	i = 0;
 	while (i < base)
 	{
 		if (c == str[i] || c == str2[i])
@@ -24,27 +38,25 @@ int	base(int c, int base)
 	return (-1);
 }
 
-int ft_atoi_base(const char *str, int str_base)
+int	ft_atoi_base(const char *str, int str_base)
 {
-	int nb = 0;
-	int negatif = 0;
-	int	i = 0;
+	int		nb;
+	int		i;
+
+	nb = 0;
+	i = 0;
+	if (str == NULL)
+	{
+		return (16777215);
+	}
 	while (ft_iswhitespace(str[i]))
 		i++;
-	if (str[i] == '+' || str[i] == '-')
-	{
-		if (str[i] == '-')
-			negatif = 1;
-		i++;
-	}
 	while (base(str[i], str_base) != -1)
 	{
 		nb = nb * str_base;
 		nb = nb + base(str[i], str_base);
 		i++;
 	}
-	if (negatif)
-		return (-nb);
 	return (nb);
 }
 

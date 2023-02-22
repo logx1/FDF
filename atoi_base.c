@@ -6,7 +6,7 @@
 /*   By: abdel-ou <abdel-ou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 15:04:10 by abdel-ou          #+#    #+#             */
-/*   Updated: 2023/02/14 15:11:29 by abdel-ou         ###   ########.fr       */
+/*   Updated: 2023/02/18 20:24:18 by abdel-ou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,7 @@
 
 int	ft_iswhitespace(char const c)
 {
-	if (c == ' ' || c == '\n' || c == '\t' || c == '\v'
-		|| c == '\r' || c == '\f')
+	if (c == ' ' || c == '\n' || c == '\t')
 		return (1);
 	return (0);
 }
@@ -40,10 +39,10 @@ int	base(int c, int base)
 
 int	ft_atoi_base(const char *str, int str_base)
 {
-	int		nb;
+	int		n;
 	int		i;
 
-	nb = 0;
+	n = 0;
 	i = 0;
 	if (str == NULL)
 	{
@@ -53,11 +52,11 @@ int	ft_atoi_base(const char *str, int str_base)
 		i++;
 	while (base(str[i], str_base) != -1)
 	{
-		nb = nb * str_base;
-		nb = nb + base(str[i], str_base);
+		n = n * str_base;
+		n = n + base(str[i], str_base);
 		i++;
 	}
-	return (nb);
+	return (n);
 }
 
 // int	main(int ac, char **av)

@@ -6,7 +6,7 @@
 /*   By: abdel-ou <abdel-ou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 09:32:32 by abdel-ou          #+#    #+#             */
-/*   Updated: 2023/02/16 12:21:40 by abdel-ou         ###   ########.fr       */
+/*   Updated: 2023/02/20 17:26:43 by abdel-ou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,7 @@
 # include <unistd.h>
 # include <fcntl.h>
 # include <math.h>
-# include <string.h>
-# include <math.h>
-# include "../minilibx_macos/mlx.h"
-# include <stdio.h>
-# define seting matrix[0][0]
+# include <mlx.h>
 
 typedef struct s_point
 {
@@ -30,12 +26,12 @@ typedef struct s_point
 	float		z;
 	int			is_last;
 
-	int		color;
+	int			color;
 	int			scale;
 	int			z_scale;
 	int			push_x;
 	int			push_y;
-	int			is_isometric;
+
 	double		angle;
 	int			win_weight;
 	int			weight;
@@ -43,12 +39,12 @@ typedef struct s_point
 	int			win_height;
 	void		*mlx;
 	void		*win;
+	void		*img;
+	char		*addr;
+	int			bits_per_pixel;
+	int			line_length;
+	int			endian;
 }				t_point;
-
-typedef struct	s_vars {
-	void	*mlx;
-	void	*win;
-}				t_vars;
 
 typedef struct s_color
 {
@@ -57,12 +53,11 @@ typedef struct s_color
 	float	color_b;
 }t_color;
 
-
-t_point			**read_map(char *file_name);
-void			isometric(t_point *dot, double angle);
-void			draw(t_point **matrix);
-void			set_param(t_point *a, t_point *b, t_point *param);
-int				deal_key(int key, t_point **matrix);
+t_point	**read_map(char *file_name);
+void	isometric(t_point *dot, double angle);
+void	draw(t_point **matrix);
+void	set_param(t_point *a, t_point *b, t_point *param);
+int		click_key(int key, t_point **matrix);
 char	*get_next_line(int fd, int BUFFER_SIZE);
 int		ft_strlen(char *str);
 char	*ft_strdup(char *str);
@@ -72,8 +67,9 @@ char	*ft_strjoin(char *str1, char *str2);
 char	*ft_substr(char *s, int start, size_t len);
 char	*buckup_finder(char *line);
 char	**ft_split(char const *s, char c);
-int	ft_atoi(const char *str);
+int		ft_atoi(const char *str);
 char	*ft_strnstr(const char *haystack, const char *needle);
-int ft_atoi_base(const char *str, int str_base);
-int ffcolor(int leaght, int color1, int color2, int p);
+int		ft_atoi_base(const char *str, int str_base);
+int		ffcolor(int leaght, int color1, int color2, int p);
+void	responsiv(t_point **a, t_point *param);
 #endif

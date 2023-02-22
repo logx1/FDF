@@ -6,7 +6,7 @@
 /*   By: abdel-ou <abdel-ou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 09:32:23 by abdel-ou          #+#    #+#             */
-/*   Updated: 2023/02/14 15:34:20 by abdel-ou         ###   ########.fr       */
+/*   Updated: 2023/02/22 16:40:29 by abdel-ou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,15 @@ float	maxx(float a, float b)
 	}
 }
 
-void	line(t_point a, t_point b, t_point *param)
+void	my_mlx_pixel_put(t_point *data, int x, int y, int color)
+{
+	char	*dst;
+
+	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
+	*(unsigned int *)dst = color;
+}
+
+void	line(t_point a, t_point b, t_point *p)
 {
 	float	x_step;
 	float	y_step;
@@ -41,22 +49,24 @@ void	line(t_point a, t_point b, t_point *param)
 	int		i;
 
 	i = 0;
-	set_param(&a, &b, param);
+	set_param(&a, &b, p);
 	x_step = b.x - a.x;
 	y_step = b.y - a.y;
 	mx = maxx(fmodule(x_step), fmodule(y_step));
 	x_step /= mx;
 	y_step /= mx;
-	while ((int)(a.x - b.x) || (int)(a.y - b.y))
+	if (a.x < p->win_weight && a.y < p->win_height && a.x > 0 && a.y > 0)
 	{
-		mlx_pixel_put(param->mlx, param->win, a.x, a.y,
-			ffcolor((int)mx, a.color, b.color, i));
+		while ((int)(a.x - b.x) || (int)(a.y - b.y))
+		{
+			my_mlx_pixel_put(p, a.x, a.y,
+				ffcolor((int)mx, a.color, b.color, i++));
 		a.x += x_step;
 		a.y += y_step;
-		i++;
-		if (a.x > param->win_weight || a.y > param->win_height
-			|| a.y < 0 || a.x < 0)
-			break ;
+			if (a.x > p->win_weight || a.y > p->win_height
+				|| a.y < 0 || a.x < 0)
+				break ;
+		}
 	}
 }
 
@@ -72,13 +82,15 @@ void	draw(t_point **matrix)
 		while (1)
 		{
 			if (matrix[y + 1])
-				line(matrix[y][x], matrix[y + 1][x], &seting);
-			if (!matrix[y][x].is_last)
-				line(matrix[y][x], matrix[y][x + 1], &seting);
-			if (matrix[y][x].is_last)
+				line(matrix[y][x], matrix[y + 1][x], &matrix[0][0]);
+			if (matrix[y][x].is_last == 0)
+				line(matrix[y][x], matrix[y][x + 1], &matrix[0][0]);
+			if (matrix[y][x].is_last == 1)
 				break ;
 			x++;
 		}
 		y++;
 	}
+	mlx_put_image_to_window(matrix[0][0].mlx, matrix[0][0].win,
+		matrix[0][0].img, 0, 0);
 }

@@ -6,7 +6,7 @@
 /*   By: abdel-ou <abdel-ou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 09:32:48 by abdel-ou          #+#    #+#             */
-/*   Updated: 2023/02/15 22:15:06 by abdel-ou         ###   ########.fr       */
+/*   Updated: 2023/02/18 20:24:01 by abdel-ou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,10 +91,12 @@ t_point	**read_map(char *file_name)
 	fd = open(file_name, O_RDONLY, 0);
 	y = 0;
 	line = get_next_line(fd, 5);
+	matrix[0][0].weight = ft_word_count(line, ' ');
 	while (line > 0)
 	{
 		fill_line(line, matrix, y++);
 		line = get_next_line(fd, 5);
+		matrix[0][0].height = y;
 	}
 	free(line);
 	matrix[y] = NULL;

@@ -6,7 +6,7 @@
 /*   By: abdel-ou <abdel-ou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 09:32:44 by abdel-ou          #+#    #+#             */
-/*   Updated: 2023/02/22 18:23:18 by abdel-ou         ###   ########.fr       */
+/*   Updated: 2023/02/26 19:52:35 by abdel-ou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,9 +68,7 @@ int	main(int argc, char **argv)
 	}
 	else
 	{
-		write(1, "check the number of argc!!", 26);
+		write(1, "please check your parameter or argc!!", 37);
 	}
 	return (0);
 }
-
-// -----------------------------------------

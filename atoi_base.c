@@ -6,13 +6,13 @@
 /*   By: abdel-ou <abdel-ou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 15:04:10 by abdel-ou          #+#    #+#             */
-/*   Updated: 2023/02/18 20:24:18 by abdel-ou         ###   ########.fr       */
+/*   Updated: 2023/02/24 15:43:23 by abdel-ou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "src/fdf.h"
 
-int	ft_iswhitespace(char const c)
+int	ft_skip_space(char const c)
 {
 	if (c == ' ' || c == '\n' || c == '\t')
 		return (1);
@@ -48,7 +48,7 @@ int	ft_atoi_base(const char *str, int str_base)
 	{
 		return (16777215);
 	}
-	while (ft_iswhitespace(str[i]))
+	while (ft_skip_space(str[i]))
 		i++;
 	while (base(str[i], str_base) != -1)
 	{
